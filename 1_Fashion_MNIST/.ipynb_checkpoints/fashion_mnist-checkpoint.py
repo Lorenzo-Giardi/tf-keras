@@ -45,9 +45,10 @@ for i in range(9):
 plt.show()
 
 
-# baseline (85% accuracy)
+# baseline (54% accuracy)
 model = Sequential()
 model.add(Flatten(input_shape = [28,28]))
+model.add(Dense(1))
 model.add(Dense(10, activation= 'softmax'))
 
 model.compile(loss = 'sparse_categorical_crossentropy', optimizer='sgd', metrics=['accuracy'])
