@@ -30,12 +30,12 @@ def plot_series(series, y=None, y_pred=None, x_label="$t$", y_label="$x(t)$", n_
     plt.axis([0, n_steps + 1, -1, 1])
     
 # plot a time-series with unlimited forecast lenght
-def plot_multiple_forecasts(X, Y, Y_pred):
+def plot_multiple_forecasts(X, Y, Y_pred, seq_id=0):
     n_steps = X.shape[1]
     ahead = Y.shape[1]
-    plot_series(X[0, :, 0])
-    plt.plot(np.arange(n_steps, n_steps + ahead), Y[0, :, 0], "ro-", label="Actual")
-    plt.plot(np.arange(n_steps, n_steps + ahead), Y_pred[0, :, 0], "bx-", label="Forecast", markersize=10)
+    plot_series(X[seq_id, :, 0])
+    plt.plot(np.arange(n_steps, n_steps + ahead), Y[seq_id, :, 0], "ro-", label="Actual")
+    plt.plot(np.arange(n_steps, n_steps + ahead), Y_pred[seq_id, :, 0], "bx-", label="Forecast", markersize=10)
     plt.axis([0, n_steps + ahead, -1, 1])
     plt.legend(fontsize=14)
 
@@ -44,11 +44,11 @@ def last_time_step_mse(y_true, y_pred):
     return mean_squared_error(y_true[:, -1], y_pred[:, -1])
 
 # plot learning curves from history object
-def plot_learning_curves(loss, val_loss):
+def plot_learning_curves(loss, val_loss, axis = [1, 20, 0, 0.05]):
     plt.plot(np.arange(len(loss)) + 0.5, loss, "b.-", label="Training loss")
     plt.plot(np.arange(len(val_loss)) + 1, val_loss, "r.-", label="Validation loss")
     plt.gca().xaxis.set_major_locator(mpl.ticker.MaxNLocator(integer=True))
-    plt.axis([1, 20, 0, 0.05])
+    plt.axis(axis)
     plt.legend(fontsize=14)
     plt.xlabel("Epochs")
     plt.ylabel("Loss")
