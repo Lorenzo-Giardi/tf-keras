@@ -27,7 +27,7 @@ def plot_series(series, y=None, y_pred=None, x_label="$t$", y_label="$x(t)$", n_
     if y_label:
         plt.ylabel(y_label, fontsize=16, rotation=0)
     plt.hlines(0, 0, 100, linewidth=1)
-    plt.axis([0, n_steps + 1, -1, 1])
+    plt.axis([0, n_steps + 1, -2, 2])
     
 # plot a time-series with unlimited forecast lenght
 def plot_multiple_forecasts(X, Y, Y_pred, seq_id=0):
@@ -36,7 +36,7 @@ def plot_multiple_forecasts(X, Y, Y_pred, seq_id=0):
     plot_series(X[seq_id, :, 0])
     plt.plot(np.arange(n_steps, n_steps + ahead), Y[seq_id, :, 0], "ro-", label="Actual")
     plt.plot(np.arange(n_steps, n_steps + ahead), Y_pred[seq_id, :, 0], "bx-", label="Forecast", markersize=10)
-    plt.axis([0, n_steps + ahead, -1, 1])
+    plt.axis([0, n_steps + ahead, -2, 2])
     plt.legend(fontsize=14)
 
 
